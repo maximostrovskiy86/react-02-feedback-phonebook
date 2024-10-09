@@ -1,21 +1,25 @@
 import React from "react";
+import PropTypes from "prop-types";
+
 
 const Statistics = ({good, bad, neutral, positivePercentage, total}) => {
     return (
-        <>
-            {/*<h1>Please Leave feedback</h1>*/}
-            <form>
-                {/*<input name='good' type="button" value="Good" onClick={this.handleClick}/>*/}
-                {/*<input name='neutral' type="button" value="Neutral" onClick={this.handleClick}/>*/}
-                {/*<input name='bad' type="button" value="Bad" onClick={this.handleClick}/>*/}
-            </form>
+        <div>
             <p>Good: {good}</p>
             <p>Neutral: {neutral}</p>
             <p>Bad: {bad}</p>
-            <p>Total: {total}</p>
+            <p>Total: {total()}</p>
             <p>Positive Feedback: {positivePercentage()} %</p>
-        </>
+        </div>
     )
 }
+
+Statistics.propTypes = {
+    good: PropTypes.number.isRequired,
+    neutral: PropTypes.number.isRequired,
+    bad: PropTypes.number.isRequired,
+    total: PropTypes.number.isRequired,
+    positivePercentage: PropTypes.number.isRequired,
+};
 
 export default Statistics;
