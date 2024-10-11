@@ -19,12 +19,15 @@ class App extends Component {
         filter: '',
     }
 
+    isContactExist = (name) => {
+        name = name.toLowerCase();
+        return this.state.contacts.every(item => item.name.toLowerCase() !== name);
+    }
 
     setFilter = (e) => {
         console.log("e", e.target.value);
         this.setState({filter: e.target.value});
     }
-
 
     addUser = (user) => {
         console.log("user", user)
@@ -37,11 +40,11 @@ class App extends Component {
         const normalizedFilter = this.state.filter.toLowerCase();
         const visibleContacts = this.state.contacts.filter(item =>
             item.name.toLowerCase().includes(normalizedFilter));
-        
+
         return (
             <Container>
                 <Section title="Phonebook">
-                    <Form addUser={this.addUser}/>
+                    <Form addUser={this.addUser} isContactExist={this.isContactExist}/>
                 </Section>
                 <Section title="Contacts">
                     <Filter filter={this.state.filter} setFilter={this.setFilter}/>

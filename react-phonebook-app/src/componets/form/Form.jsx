@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import {FormContainer} from "./Form.styled";
 import {nanoid} from "nanoid";
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 class Form extends Component {
 
@@ -20,8 +21,11 @@ class Form extends Component {
 
         const {name, number} = this.state;
 
-        console.log("STATE", this.state)
-        console.log("PROPS", this.props)
+        const isExistContact = this.props.isContactExist(name);
+        if (!isExistContact) {
+            Notify.failure(`${name} is already in contacts`);
+            return;
+        }
 
         this.props.addUser({
             name,
@@ -38,7 +42,6 @@ class Form extends Component {
             number: ''
         })
     }
-
 
     render() {
         return (
